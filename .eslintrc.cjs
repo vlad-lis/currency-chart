@@ -35,5 +35,13 @@ module.exports = {
     'react/function-component-definition': 'off',
     'no-param-reassign': 'off',
     'no-console': 'off',
+    'jsx-a11y/label-has-associated-control': [
+      'error',
+      {
+        required: {
+          some: ['nesting', 'id'],
+        },
+      },
+    ],
   },
 };
