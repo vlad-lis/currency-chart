@@ -1,25 +1,67 @@
-import { ReactElement } from 'react';
-import { useSelector } from 'react-redux';
+import React, { ReactElement } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
+import {
+  setSelectedCurrencies,
+  setStartDate,
+  setEndDate,
+} from '../../store/filtersSlice';
 
 const Filters = (): ReactElement => {
-  const { startDate, endDate } = useSelector(
+  const { selectedCurrencies, startDate, endDate } = useSelector(
     (state: RootState) => state.filters
   );
+  const dispatch = useDispatch();
+
+  const handleCurrencyChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(setSelectedCurrencies(e.target.value));
+    console.log(selectedCurrencies);
+  };
+
+  const handleStartDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(setStartDate(e.target.value));
+  };
+
+  const handleEndDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(setEndDate(e.target.value));
+  };
 
   return (
     <div>
       <p>Filters</p>
       <div>
-        <input type='checkbox' value='EUR' /> EUR
-        <input type='checkbox' value='USD' /> USD
-        <input type='checkbox' value='CNY' /> CNY
+        <input type='checkbox' value='EUR' onChange={handleCurrencyChange} />{' '}
+        EUR
+        <input
+          type='checkbox'
+          value='USD'
+          onChange={handleCurrencyChange}
+        />{' '}
+        USD
+        <input
+          type='checkbox'
+          value='CNY'
+          onChange={handleCurrencyChange}
+        />{' '}
+        CNY
       </div>
       <div>
         <label htmlFor='startDate'>From:</label>
-        <input type='date' id='startDate' name='startDate' value={startDate} />
+        <input
+          type='date'
+          id='startDate'
+          name='startDate'
+          value={startDate}
+          onChange={handleStartDateChange}
+        />
         <label htmlFor='endDate'>To:</label>
-        <input type='date' id='endDate' name='endDate' value={endDate} />
+        <input
+          type='date'
+          id='endDate'
+          name='endDate'
+          value={endDate}
+          onChange={handleEndDateChange}
+        />
       </div>
     </div>
   );

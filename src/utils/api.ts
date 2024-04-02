@@ -3,8 +3,8 @@ import BASE_URL from './constants';
 
 type TCurrencyRatios = {
   date: string;
-  currencies: {
-    [key: string]: number;
+  baseCurrency: {
+    [ratio: string]: number;
   };
 };
 
@@ -14,7 +14,7 @@ type ApiResponse = {
   status?: number;
 };
 
-const fetchCurrencyRatio = async (): Promise<ApiResponse> => {
+const fetchCurrencyRatios = async (): Promise<ApiResponse> => {
   try {
     const res = await axios.get(BASE_URL);
     return {
@@ -31,4 +31,4 @@ const fetchCurrencyRatio = async (): Promise<ApiResponse> => {
   }
 };
 
-export default fetchCurrencyRatio;
+export default fetchCurrencyRatios;
