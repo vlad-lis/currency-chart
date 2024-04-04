@@ -4,6 +4,8 @@ import Chart from './components/Chart/Chart';
 import Filters from './components/Filters/Filters';
 import { RootState } from './store/store';
 import fetchCurrencyRatios from './utils/api';
+import Header from './components/Header/Header';
+import ApiCounter from './components/ApiCounter/ApiCounter';
 
 type TCachedDataItem = {
   date: string;
@@ -90,14 +92,16 @@ function App() {
   }, [dateRange, selectedCurrencies]);
 
   return (
-    <div>
-      <p>Currency Page</p>
-      <p>Total API Calls: {apiCallCounter}</p>
-      <Filters />
-      {!isChartDisplayed ? null : (
-        <Chart data={currentChartData} isLoading={isLoading} />
-      )}
-    </div>
+    <>
+      <Header />
+      <main>
+        <Filters />
+        <ApiCounter counter={apiCallCounter} />
+        {!isChartDisplayed ? null : (
+          <Chart data={currentChartData} isLoading={isLoading} />
+        )}
+      </main>
+    </>
   );
 }
 
