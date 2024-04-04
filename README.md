@@ -1,46 +1,31 @@
-# Getting Started with Create React App
+# Currency chart
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Проект выложен по адресу: https://vlad-lis.github.io/currency-chart/
 
-## Available Scripts
+## Запросы к API
 
-In the project directory, you can run:
+- Использован API https://github.com/fawazahmed0/exchange-api
+- Для сокращения количества запросов к API данные сохраняются в session storage (там же сохраняется счетчик запросов)
+- API возвращает данные не ранее 2 марта 2024 г., иначе возвращает 404 (ошибка выводится в консоль)
+- Так как API не возвращает данные до 2 марта 2024 г., запросы при изменении фильтров на более ранние даты намеренно проходят повторно (для демонстрации) и увеличивают счетчик
+- Запросы со 2 марта 2024 г. до текущей даты осуществляются один раз. При изменении фильтров дат/валют в этом периоде данные берутся из session storage, новые запросы не уходят
 
-### `npm start`
+## Запуск проекта локально
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+1. Клонировать репозиторий:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+```
+git clone git@github.com:vlad-lis/posts.git
+```
 
-### `npm test`
+2. Установить зависимости из корневой папки:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+npm i
+```
 
-### `npm run build`
+3. Запустить проект:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+```
+npm run start
+```

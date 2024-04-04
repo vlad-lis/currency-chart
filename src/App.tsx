@@ -17,7 +17,10 @@ function App() {
   const { dateRange, selectedCurrencies } = useSelector(
     (state: RootState) => state.filters
   );
-  const [apiCallCounter, setApiCallCounter] = useState(0);
+  const [apiCallCounter, setApiCallCounter] = useState<number>(() => {
+    const storedValue = sessionStorage.getItem('apiCallCounter');
+    return storedValue ? parseInt(storedValue, 10) : 0;
+  });
   const [currentChartData, setCurrentChartData] = useState([]);
   const [isChartDisplayed, setIsChartDisplayed] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -90,6 +93,11 @@ function App() {
     setCurrentChartData([]);
     getChartData();
   }, [dateRange, selectedCurrencies]);
+
+  // save counter to sessionStorage on change
+  useEffect(() => {
+    sessionStorage.setItem('apiCallCounter', apiCallCounter.toString());
+  }, [apiCallCounter]);
 
   return (
     <>
