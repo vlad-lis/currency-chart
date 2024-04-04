@@ -35,6 +35,9 @@ module.exports = {
     'react/function-component-definition': 'off',
     'no-param-reassign': 'off',
     'no-console': 'off',
+    'no-await-in-loop': 'off',
+    'no-continue': 'off',
+    'no-restricted-syntax': 'off',
     'jsx-a11y/label-has-associated-control': [
       'error',
       {
