@@ -38,6 +38,7 @@ module.exports = {
     'no-await-in-loop': 'off',
     'no-continue': 'off',
     'no-restricted-syntax': 'off',
+    'react/no-array-index-key': 'off',
     'jsx-a11y/label-has-associated-control': [
       'error',
       {

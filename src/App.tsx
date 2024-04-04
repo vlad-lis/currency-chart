@@ -16,6 +16,7 @@ function App() {
     (state: RootState) => state.filters
   );
   const [apiCallCounter, setApiCallCounter] = useState(0);
+  const [currentChartData, setCurrentChartData] = useState([]);
 
   useEffect(() => {
     const getChartData = async () => {
@@ -57,16 +58,26 @@ function App() {
                   [currency]: res.data?.[currency]?.rub,
                 });
               }
-
-              sessionStorage.setItem('cachedData', JSON.stringify(cachedData));
             } catch (error) {
               console.error('Error fetching data:', error);
             }
           }
         }
+
+        sessionStorage.setItem('cachedData', JSON.stringify(cachedData));
+        const filteredData = cachedData.filter((item: TCachedDataItem) =>
+          dateRange.includes(item.date)
+        );
+        filteredData.sort(
+          (a: TCachedDataItem, b: TCachedDataItem) =>
+            new Date(a.date).getTime() - new Date(b.date).getTime()
+        );
+
+        setCurrentChartData(filteredData);
       }
     };
 
+    setCurrentChartData([]);
     getChartData();
   }, [dateRange, selectedCurrencies]);
 
@@ -75,7 +86,7 @@ function App() {
       <p>Currency Page</p>
       <p>Total API Calls: {apiCallCounter}</p>
       <Filters />
-      <Chart />
+      <Chart data={currentChartData} />
     </div>
   );
 }
