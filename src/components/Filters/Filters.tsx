@@ -23,7 +23,6 @@ const Filters = (): ReactElement => {
       updatedCurrencies = selectedCurrencies.filter(
         (currency) => currency !== value.toLowerCase()
       );
-      console.log('Updated Currencies:', updatedCurrencies);
     }
 
     dispatch(setSelectedCurrencies(updatedCurrencies));
