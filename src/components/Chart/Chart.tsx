@@ -2,6 +2,7 @@ import { ReactElement } from 'react';
 import { useSelector } from 'react-redux';
 import { Legend, Line, LineChart, Tooltip, XAxis, YAxis } from 'recharts';
 import { RootState } from '../../store/store';
+import Loader from '../Loader/Loader';
 
 type TCachedDataItem = {
   date: string;
@@ -11,9 +12,10 @@ type TCachedDataItem = {
 
 type TChartProps = {
   data: TCachedDataItem[];
+  isLoading: boolean;
 };
 
-const Chart = ({ data }: TChartProps): ReactElement => {
+const Chart = ({ data, isLoading }: TChartProps): ReactElement => {
   console.log(data);
   const { selectedCurrencies } = useSelector(
     (state: RootState) => state.filters
@@ -31,6 +33,10 @@ const Chart = ({ data }: TChartProps): ReactElement => {
         return '#000000';
     }
   };
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <div>

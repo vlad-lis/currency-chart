@@ -17,10 +17,16 @@ function App() {
   );
   const [apiCallCounter, setApiCallCounter] = useState(0);
   const [currentChartData, setCurrentChartData] = useState([]);
+  const [isChartDisplayed, setIsChartDisplayed] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
     const getChartData = async () => {
+      setIsChartDisplayed(false);
+
       if (selectedCurrencies.length > 0 && dateRange.length > 0) {
+        setIsChartDisplayed(true);
+        setIsLoading(true);
         const cachedData = JSON.parse(
           sessionStorage.getItem('cachedData') || '[]'
         );
@@ -64,6 +70,7 @@ function App() {
           }
         }
 
+        // save to session storage and filter
         sessionStorage.setItem('cachedData', JSON.stringify(cachedData));
         const filteredData = cachedData.filter((item: TCachedDataItem) =>
           dateRange.includes(item.date)
@@ -74,6 +81,7 @@ function App() {
         );
 
         setCurrentChartData(filteredData);
+        setIsLoading(false);
       }
     };
 
@@ -86,7 +94,9 @@ function App() {
       <p>Currency Page</p>
       <p>Total API Calls: {apiCallCounter}</p>
       <Filters />
-      <Chart data={currentChartData} />
+      {!isChartDisplayed ? null : (
+        <Chart data={currentChartData} isLoading={isLoading} />
+      )}
     </div>
   );
 }
