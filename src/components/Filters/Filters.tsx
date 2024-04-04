@@ -21,8 +21,9 @@ const Filters = (): ReactElement => {
       updatedCurrencies = [...selectedCurrencies, value.toLowerCase()];
     } else {
       updatedCurrencies = selectedCurrencies.filter(
-        (currency) => currency !== value
+        (currency) => currency !== value.toLowerCase()
       );
+      console.log('Updated Currencies:', updatedCurrencies);
     }
 
     dispatch(setSelectedCurrencies(updatedCurrencies));
