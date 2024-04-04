@@ -14,8 +14,18 @@ const Filters = (): ReactElement => {
   const dispatch = useDispatch();
 
   const handleCurrencyChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(setSelectedCurrencies(e.target.value));
-    console.log(selectedCurrencies);
+    const { value, checked } = e.target;
+    let updatedCurrencies: string[];
+
+    if (checked) {
+      updatedCurrencies = [...selectedCurrencies, value];
+    } else {
+      updatedCurrencies = selectedCurrencies.filter(
+        (currency) => currency !== value
+      );
+    }
+
+    dispatch(setSelectedCurrencies(updatedCurrencies));
   };
 
   const handleStartDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {

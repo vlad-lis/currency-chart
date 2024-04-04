@@ -14,9 +14,14 @@ type ApiResponse = {
   status?: number;
 };
 
-const fetchCurrencyRatios = async (): Promise<ApiResponse> => {
+const fetchCurrencyRatios = async (
+  date: string,
+  currency: string
+): Promise<ApiResponse> => {
   try {
-    const res = await axios.get(BASE_URL);
+    const res = await axios.get(
+      `${BASE_URL}${date}/v1/currencies/${currency}.json`
+    );
     return {
       success: true,
       data: res.data,
