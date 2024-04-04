@@ -3,8 +3,9 @@ import BASE_URL from './constants';
 
 type TCurrencyRatios = {
   date: string;
-  baseCurrency: {
-    [ratio: string]: number;
+} & {
+  [currency: string]: {
+    [key: string]: number;
   };
 };
 
@@ -20,7 +21,7 @@ const fetchCurrencyRatios = async (
 ): Promise<ApiResponse> => {
   try {
     const res = await axios.get(
-      `${BASE_URL}${date}/v1/currencies/${currency}.json`
+      `${BASE_URL}${date}/v1/currencies/${currency.toLowerCase()}.json`
     );
     return {
       success: true,

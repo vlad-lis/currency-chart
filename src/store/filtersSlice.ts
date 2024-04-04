@@ -14,7 +14,10 @@ const initialState: FiltersState = {
     .toISOString()
     .split('T')[0],
   endDate: new Date().toISOString().split('T')[0],
-  dateRange: [],
+  dateRange: generateDateRange(
+    new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+    new Date().toISOString().split('T')[0]
+  ),
 };
 
 const filtersSlice = createSlice({

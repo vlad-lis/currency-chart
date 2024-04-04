@@ -18,7 +18,7 @@ const Filters = (): ReactElement => {
     let updatedCurrencies: string[];
 
     if (checked) {
-      updatedCurrencies = [...selectedCurrencies, value];
+      updatedCurrencies = [...selectedCurrencies, value.toLowerCase()];
     } else {
       updatedCurrencies = selectedCurrencies.filter(
         (currency) => currency !== value
