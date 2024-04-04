@@ -15,7 +15,7 @@
 1. Клонировать репозиторий:
 
 ```
-git clone git@github.com:vlad-lis/posts.git
+git clone git@github.com:vlad-lis/currency-chart.git
 ```
 
 2. Установить зависимости из корневой папки:
