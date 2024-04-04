@@ -52,8 +52,8 @@ const Chart = ({ data, isLoading }: TChartProps): ReactElement => {
           bottom: 5,
         }}
       >
-        <XAxis dataKey='date' tick={{ fontSize: 10 }} />
-        <YAxis tick={{ fontSize: 12 }} />
+        <XAxis strokeWidth={2} dataKey='date' tick={{ fontSize: 10 }} />
+        <YAxis strokeWidth={2} tick={{ fontSize: 12 }} />
         <Tooltip />
         <Legend />
         {selectedCurrencies.map((currency, index) => {
@@ -63,6 +63,7 @@ const Chart = ({ data, isLoading }: TChartProps): ReactElement => {
               type='monotone'
               dataKey={currency}
               stroke={getStrokeColor(currency)}
+              strokeWidth={2}
             />
           );
         })}
